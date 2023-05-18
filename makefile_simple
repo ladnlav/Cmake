@@ -1,0 +1,16 @@
+TARGET = ./main.exe
+
+.PHONY: all, build, clean, run
+
+${TARGET}:
+	gcc -I path\to\include\files -L path\to\libs hello.c -lmylib -o ${TARGET}
+
+all: clean build
+
+build: ${TARGET}
+
+clean:
+	rm -rf ${TARGET}
+
+run:
+	${TARGET}
