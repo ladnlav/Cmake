@@ -1,0 +1,49 @@
+# Define the target output file name as the current folder name
+TARGET = $(notdir $(CURDIR)).exe
+
+# Define the include directory for additional header files
+IncDIR = \
+	-Iutils
+
+# Define the directory containing the source files
+SRC_DIR = .
+
+# Define the extension of the source files
+SRC_EXT = c
+
+# Detect all the source files in the specified directory
+SRCS = $(wildcard $(SRC_DIR)/*.$(SRC_EXT))
+
+# Define the libraries to link against
+LIBS = -llibgmp -llibgmpxx -lmsmpi -lmsmpifec -lmsmpifmc
+
+# Define the directory containing the libraries
+LIB_DIR = -LC:\Libs_and_Includes\gmp\lib -L"C:\Program Files (x86)\Progs\MPI\Lib\x64"
+
+# Define the directory containing the library headers
+LIB_INC_DIR = -IC:\Libs_and_Includes\gmp\include -I"C:\Program Files (x86)\Progs\MPI\Include"
+
+# Specify the include directories for the compiler
+INC_DIRS = $(IncDIR) $(LIB_INC_DIR)
+
+.PHONY: all build clean run
+
+# Rule to build the target output file
+$(TARGET): $(SRCS)
+	gcc $(INC_DIRS) $(LIB_DIR) $(SRCS) $(LIBS) -o $(TARGET)
+#	gcc -I (path to your include files) -L (path to your libs) src.c -lgmp (name of your libs) -o src.exe
+#	gcc $(SRCS) -o hello.exe
+
+# Rule to clean the generated output file
+clean:
+	rm -rf $(TARGET)
+
+# Rule to build the target by default
+all: clean build
+
+# Rule to build the target
+build: $(TARGET)
+
+# Rule to run the target output file
+run:
+	./$(TARGET)
