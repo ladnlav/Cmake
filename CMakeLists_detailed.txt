@@ -1,0 +1,58 @@
+cmake_minimum_required ( VERSION 3.0 )
+# Укажите здесь имя вашего проекта.
+# Учитываете установку переменных 
+# <project_name>_BINARY_DIR и  <project_name>_SOURCE_DIR
+# в значение имени каталога с проектом.
+#Штука для vcpkg
+
+#set(CMAKE_TOOLCHAIN_FILE "C:/Libs_and_Includes/vcpkg/scripts/buildsystems/vcpkg.cmake")
+
+project ( main )
+
+#Поиск необходимой библиотеки
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(gmp REQUIRED IMPORTED_TARGET gmp)
+
+set ( SRC_DIR ${PROJECT_SOURCE_DIR}/src )
+
+# Укажите вместо my-project имя своего приложения
+# - имя исполняемого файла
+set ( APP_NAME main )
+
+# Управление типом сборки через задание значения
+# предопределенной переменной CMAKE_BUILD_TYPE
+# Возможные значения:
+# DEBUG|RELEASE|RELWITHDEBINFO|MINSIZEREL
+set( CMAKE_BUILD_TYPE RELEASE )
+
+# Снять комментарий для добавления пути на 
+# заголовочные файлы, которые следует добавить 
+# для компиляции проекта
+include_directories ( C:/Libs_and_Includes/vcpkg/installed/x64-windows/include )
+#include_directories ( /path/to/headers_2 )
+# ...
+#include_directories ( /path/to/headers_N )
+
+# Снять комментарий для добавления пути на 
+# библиотеки, которые следует добавить 
+# для линковки проекта
+link_directories ( C:/Libs_and_Includes/vcpkg/installed/x64-windows/lib )
+#link_directories ( /path/to/lib_2 )
+# ...
+#link_directories ( /path/to/lib_N )
+
+list(APPEND SRC ${SRC_DIR}/main.cpp )
+# снять комментарий для добавления других *.cpp файлов
+# list(APPEND SRC ${SRC_DIR}/file_1.cpp )
+# list(APPEND SRC ${SRC_DIR}/file_2.cpp )
+# ...
+# list(APPEND SRC ${SRC_DIR}/file_N.cpp )
+
+add_executable ( ${APP_NAME} ${SRC} )
+
+# Снять комментарий для добавления имени библиотеки
+# требуемой для линковки проекта
+target_link_libraries(${APP_NAME} PkgConfig::gmp)
+#target_link_libraries( ${APP_NAME} name_2 )
+# ...
+#target_link_libraries( ${APP_NAME} name_N )

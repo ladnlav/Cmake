@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.0.0)
+
+project(main VERSION 0.1.0)
+
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
+
+#INCLUDE_DIRECTORIES(
+#    C:/Libs_and_Includes/vcpkg/installed/x64-windows/include/
+#)
+
+#LINK_DIRECTORIES(
+#    C:/Libs_and_Includes/vcpkg/installed/x64-windows/lib/
+#)
+
+#-DCMAKE_TOOLCHAIN_FILE=C:/Libs_and_Includes/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+add_executable(main main.cpp)
+#target_link_libraries(main PRIVATE 
+#                    sqlite3
+#                    )
+target_link_libraries(main PRIVATE unofficial::sqlite3::sqlite3)
