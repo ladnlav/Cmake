@@ -7,7 +7,7 @@
 
 ## Структура репозитория
 
-``
+```
 my-project/                      # каталог проекта
   ├── src/                       # каталог исходных файлов проекта
   │     └── main.c             # исходный файл (пока только *.c файл)
@@ -20,7 +20,7 @@ Samples/                         # каталог шаблонов
   ├── makefile_complex           # шаблон Makefile для сложного проекта
   ├── CMakeLists_simple.txt      # шаблон простого CMakeLists.txt
   └── makefile_simple            # шаблон Makefile для простого проекта
-``
+```
 ## Используем Makefile
 ### Описание шаблона makefile
 
