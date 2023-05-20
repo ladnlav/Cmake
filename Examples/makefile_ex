@@ -1,0 +1,18 @@
+TARGET = ./main.exe
+
+.PHONY: all, build, clean, run
+
+${TARGET}:
+	gcc -I "C:/Libs_and_Includes/Cygwin/usr/include" \
+	-L "C:/Libs_and_Includes/Cygwin/lib" \
+	main.c -lgmp -lmpi -o ${TARGET}
+
+all: clean build
+
+build: ${TARGET}
+
+clean:
+	rm -rf ${TARGET}
+
+run:
+	mpirun -np 4 ${TARGET} 100000
